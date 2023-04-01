@@ -21,3 +21,4 @@ pysrt
 psutil
 requests
 gpuinfo
+gradio

@@ -412,10 +412,7 @@ with demo:
             gr.Markdown('''
                 ### You can test by following examples:
                 ''')
-        examples = gr.Examples(examples=
-              [ "sample1.wav", 
-                "sample2.wav", 
-                ],
+        examples = gr.Examples(examples=[],
               label="Examples", inputs=[upload])
         transcribe_btn.click(transcribe, [microphone, upload], outputs=text_output)
     

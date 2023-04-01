@@ -2,8 +2,28 @@
 
 main_function() {
 USER='opc'
-apt-get update -y
-apt-get install wget git python3 python3-pip python3-venv unzip ffmpeg jq -y
+sudo dnf -y install wget git python3 python3-pip python3-venv unzip ffmpeg jq
+
+# Resize root partition
+printf "fix\n" | parted ---pretend-input-tty /dev/sda print
+VALUE=$(printf "unit s\nprint\n" | parted ---pretend-input-tty /dev/sda |  grep lvm | awk '{print $2}' | rev | cut -c2- | rev)
+printf "rm 3\nIgnore\n" | parted ---pretend-input-tty /dev/sda
+printf "unit s\nmkpart\n/dev/sda3\n\n$VALUE\n100%%\n" | parted ---pretend-input-tty /dev/sda
+pvresize /dev/sda3
+pvs
+vgs
+lvextend -l +100%FREE /dev/mapper/ocivolume-root
+xfs_growfs -d /
+
+dnf install wget git python3.9 python39-devel.x86_64 libsndfile -y
+
+# Install ffmpeg
+dnf -y install https://download.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+dnf install -y https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm
+dnf install -y https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-8.noarch.rpm
+dnf config-manager --set-enabled ol8_codeready_builder
+dnf -y install ffmpeg
+
 
 APP='smart-video-analizer'
 APP_DIR="/home/$USER/$APP"
