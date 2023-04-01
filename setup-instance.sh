@@ -31,12 +31,9 @@ APP_DIR="/home/$USER/$APP"
 cat <<EOT > /etc/systemd/system/$APP.service
 [Unit]
 Description=Instance to serve $APP
-After=network.target
 [Service]
-User=$USER
-Group=www-data
-WorkingDirectory=$APP_DIR
 ExecStart=/bin/bash $APP_DIR/start.sh
+User=$USER
 [Install]
 WantedBy=multi-user.target
 EOT
