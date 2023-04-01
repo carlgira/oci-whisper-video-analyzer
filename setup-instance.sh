@@ -2,7 +2,6 @@
 
 main_function() {
 USER='opc'
-sudo dnf -y install wget git python3 python3-pip python3-venv unzip ffmpeg jq
 
 # Resize root partition
 printf "fix\n" | parted ---pretend-input-tty /dev/sda print
