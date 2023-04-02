@@ -31,6 +31,7 @@ cat <<EOT > /etc/systemd/system/$APP.service
 [Unit]
 Description=Instance to serve $APP
 [Service]
+WorkingDirectory=$APP_DIR
 ExecStart=/bin/bash $APP_DIR/start.sh
 User=$USER
 [Install]
