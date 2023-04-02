@@ -1,11 +1,5 @@
-# Webaverse in OCI
-Terraform script to start a development **webaverse** instance. 
-
-It comes with webaverse and code-server to develop directly in the browser. 
-
-[Webaverse](https://app.webaverse.com/) is an open-source and browser-based web3 metaverse engine, and anyone can build and host virtual world and gaming experiences on.
-
-<img src="webaverse.jpg">
+# OCI Video analizer
+OCI video analizer is a terraform script to deploy a video analizer in OCI. The video analizer is a gradio app that uses whisper to get the transcript of a video and then use the and ECAPA-TDNN model from SpeechBrain to encode and clasify speakers.
 
 ## Requirements
 - Terraform
@@ -17,7 +11,7 @@ It comes with webaverse and code-server to develop directly in the browser.
 
 2. Clone this repository
 ```bash
-    git clone https://github.com/carlgira/oci-webaverse.git
+    git clone https://github.com/carlgira/oci-whisper-video-analyzer.git
 ```
 
 3. Set three variables in your path. 
@@ -45,17 +39,13 @@ To build simply execute the next commands.
     terraform apply
 ```
 ## Test
-To test everything you need to create a ssh tunel to the ports 3000 and 8080 (webaverse and code-server respectively).
+To test everything you need to create a ssh tunel to the port 8000 (webaverse and code-server respectively).
 
 ```bash
-    ssh -i server.key -L 3000:localhost:3000 -L 8080:localhost:8080 ubuntu@<instance-public-ip>
+    ssh -i server.key -L 8000:localhost:8000 opc@<instance-public-ip>
 ```
 
-> ### Webaverse
-Use chrome to open the URL https://localhost:3000, and you will see the webaverse UI.
-
-> ### Code server
-Code server is a vscode in the browser, open the URL http://localhost:8080/?folder=/home/ubuntu/webaverse and youll be able to program directly on webaverse.
+Open the URL https://localhost:8000, and you can see the gradio app running.
 
 ## Clean
 To delete the instance execute.
@@ -67,11 +57,10 @@ To delete the instance execute.
 If you found some problem check if the services are down. You can check the logs and the state of each app, with the commands.
 
 ```bash
-    systemctl status webaverse.service
-    systemctl status code-server@ubuntu
+    systemctl status smart-video-analizer.service
 ```
 
 ## Acknowledgements
 
 * **Author** - [Carlos Giraldo](https://www.linkedin.com/in/carlos-giraldo-a79b073b/), Oracle
-* **Last Updated Date** - March 12th, 2023
+* **Last Updated Date** - April 2, 2023
