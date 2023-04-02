@@ -43,9 +43,6 @@ su -c "wget -O $APP_DIR/requirements.txt https://raw.githubusercontent.com/carlg
 su -c "wget -O /home/$USER/setup-app.sh https://raw.githubusercontent.com/carlgira/oci-whisper-video-analyzer/main/setup-app.sh" $USER
 su -c "source /home/$USER/setup-app.sh" $USER
 
-systemctl daemon-reload
-systemctl enable $APP
-systemctl start $APP
 }
 
 main_function 2>&1 >> /var/log/startup.log

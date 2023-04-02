@@ -17,6 +17,9 @@ export GRADIO_SERVER_PORT=8000
 $APP_DIR/.venv/bin/python $APP_DIR/app.py
 EOT
 
+sudo systemctl daemon-reload
+sudo systemctl enable $APP
+sudo systemctl start $APP
 }
 
 setup_app 2>&1 > /tmp/startup.log
